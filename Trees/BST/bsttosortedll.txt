@@ -1,0 +1,46 @@
+//Given a BST, convert it into a sorted linked list. You have to return the head of LL.
+
+
+Node<int>* constructLinkedList(BinaryTreeNode<int>* root) {
+	
+
+    Node<int>* rhead; 
+    Node<int>* lhead;
+    
+    if(root==NULL){ return NULL;}
+    
+   	lhead = constructLinkedList(root->left);
+    
+    rhead = constructLinkedList(root->right);
+    
+    
+    Node<int>* newnode= new Node<int> (root->data);
+    
+   
+    Node<int>* temp=lhead;
+    Node<int>* head=NULL;
+    
+    if(temp!=NULL)
+    {
+    	while(temp->next!=NULL)
+    	{
+        	temp=temp->next;
+    	}
+    }
+    
+    if(temp!=NULL)
+    {
+    	temp->next=newnode;
+        head=lhead;
+    }
+    else
+    {
+        head=newnode;
+    }
+     
+    newnode->next=rhead; 
+    
+    
+    return head;
+
+}

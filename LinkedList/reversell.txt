@@ -1,0 +1,41 @@
+Node *reverseLinkedListRec(Node *head)
+{
+   if(head==NULL || head->next==NULL)                  //recursive
+   {
+       return head;
+   }
+    
+    Node *ans=reverseLinkedListRec(head->next);
+ 
+Node *tail=head->next;
+ tail->next=head;   
+    
+head->next=NULL;
+    
+    return ans;
+    
+}
+
+//iterative
+
+Node *reverseLinkedList(Node *head) {
+    
+    
+    
+     Node *cur=head;
+    Node *prev=NULL;
+    Node *aft=NULL;
+    
+    while(cur!=NULL)
+    {
+    aft=cur->next;
+    cur->next=prev;
+    prev=cur;
+    cur=aft;
+    
+}
+  head = prev;
+      
+    return head;
+        
+}

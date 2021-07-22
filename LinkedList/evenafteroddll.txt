@@ -1,0 +1,78 @@
+//For a given singly linked list of integers, arrange the elements such that all the even numbers are placed after the odd numbers. The relative order of the odd and even terms should remain unchanged.
+
+
+
+
+Node *evenAfterOdd(Node *head)
+{
+    
+    if(head==NULL)
+    {
+        return head;
+    }
+    
+    Node *h1=NULL;  Node *temp=head;
+    Node *h2=NULL;  Node *t1=NULL; Node *t2=NULL;
+    
+    while(temp!=NULL)
+    {
+        if(temp->data %2 !=0)
+        {
+            if(h1==NULL)
+            {
+                h1=temp;
+                t1=temp;
+                
+            }
+            
+            else
+            {
+                
+                t1->next=temp;
+                t1=temp;
+            }
+        }
+        
+        else
+        {
+            
+            if(h2==NULL)
+            {
+                h2=temp;
+                t2=temp;
+             
+            }
+            
+            else
+            {
+                t2->next=temp;
+             
+                t2=temp;
+            }
+        }
+        
+        temp=temp->next;
+            
+        }
+    
+    if(h1==NULL)
+    {
+        return h2;
+    }
+    
+    if(h2!=NULL)
+    {
+    
+    t1->next=NULL;
+    
+    t2->next=NULL;
+
+    t1->next=h2; 
+
+    }
+  
+    return h1;
+    
+    
+ 
+}

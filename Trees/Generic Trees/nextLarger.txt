@@ -1,0 +1,39 @@
+// Given a generic tree and an integer n. Find and return the node with next larger element in the tree i.e. find a node with value just greater than n.
+Note: Return NULL if no node is present with the value greater than n.
+
+
+
+TreeNode<int>* getNextLargerElement(TreeNode<int>* root, int x) {
+    
+    
+    
+        queue<TreeNode<int>* > q; TreeNode<int>* f;  int lim=5000; TreeNode<int>* ans;
+    
+    
+    q.push(root);
+    
+    while(!q.empty())
+    {
+        
+        f=q.front();
+        q.pop();
+        
+        if(f->data>x && f->data<lim)
+        {
+            ans=f;   lim=f->data;
+        }
+       
+        
+        for(int j=0;j<f->children.size();j++)
+        {
+            
+            q.push(f->children[j]);   
+        }
+    
+        
+    }
+   
+    return ans;
+    
+    
+}

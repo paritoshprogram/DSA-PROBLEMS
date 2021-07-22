@@ -1,0 +1,42 @@
+// Given a generic tree, find and return the node with second largest value in given tree.
+Note: Return NULL if no node with required value is present.
+
+
+
+TreeNode<int>* getSecondLargestNode(TreeNode<int>* root) {
+
+    queue<TreeNode<int>* > q; TreeNode<int>* f;  TreeNode<int>* max;   TreeNode<int>* smax = NULL;   
+
+    q.push(root);
+	max = root;
+    while(!q.empty())
+    {
+
+        f=q.front();
+        q.pop();
+
+        if(f->data>max->data)
+        {
+
+            smax=max;
+
+            max=f;  
+        }
+        else if((f->data!=max->data)&&((smax==NULL)||(smax->data<f->data))){
+            // cout<<max->data<<" "<<f->data<<"\n";
+            smax = f;
+        }
+
+        for(int j=0;j<f->children.size();j++)
+        {
+
+            q.push(f->children[j]);   
+        }
+
+
+    }
+
+    return smax;
+
+
+}

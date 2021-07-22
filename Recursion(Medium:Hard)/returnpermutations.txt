@@ -1,0 +1,48 @@
+
+//Given a string S, find and return all the possible permutations of the input string.
+Note 1 : The order of permutations is not important.
+Note 2 : If original string contains duplicate characters, permutations will also be duplicates.
+Input Format :
+String S
+Output Format :
+All permutations (in different lines)
+Sample Input :
+abc
+Sample Output :
+abc
+acb
+bac
+bca
+cab
+cba
+
+
+
+
+#include <string>
+using namespace std;
+
+
+int returnPermutations(string input, string output[]){
+   	
+    
+    if(input.size() == 0){
+        
+        output[0] = "";
+        return 1;
+    }
+   string o[100000];
+    int ans = returnPermutations(input.substr(1) , o);
+    
+    int k = 0;
+    for(int i = 0 ; i < input.size() ; i++){
+        
+        for(int j = 0 ; j  <ans ; j++){
+            
+            output[k] = o[j];
+            output[k].insert(i , 1 , input[0]);
+          k++;
+        }
+    }
+    return (input.size() * ans);
+}

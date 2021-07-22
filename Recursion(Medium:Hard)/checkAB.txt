@@ -1,0 +1,75 @@
+//Suppose you have a string, S, made up of only 'a's and 'b's. Write a recursive function that checks if the string was generated using the following rules:
+a. The string begins with an 'a'
+b. Each 'a' is followed by nothing or an 'a' or "bb"
+c. Each "bb" is followed by nothing or an 'a'
+If all the rules are followed by the given string, return true otherwise return false.
+
+
+
+bool helper(char input[])
+{
+    
+        bool check1=true; bool check2=true; bool check3=true; 
+
+    
+    
+    if(input[0]=='\0')
+    {
+      return true;
+    }
+    
+    if(input[0]=='a')
+    {
+        if(input[1]=='b'&&input[2]=='a')
+        {
+            check1=false;
+        }
+    }
+    
+    else if(input[0]=='b'&&input[1]=='b')
+    {
+        if(input[2]=='b')
+        {
+            check2=false;
+        }
+    }
+    
+    if(check1==false ||check2==false)
+    {
+        check3=false;
+        
+        return check3;
+    }
+    
+    helper(input+1);
+       
+}
+
+
+
+
+
+bool checkAB(char input[]) {
+	
+    if(input[0]=='b')
+    {
+        return false;
+    }
+    
+    else
+    {
+       if (helper(input)==true)
+       {
+           return true;
+       }
+        
+        else{
+            return false;
+        }
+    
+    }
+}
+
+
+
+

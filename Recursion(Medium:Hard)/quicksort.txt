@@ -1,0 +1,63 @@
+int partition(int ar[],int start, int end)
+{
+    int temp;
+    int pivot = ar[start];
+    int l = start;
+    int r = end;
+    
+    while(l<r)
+    {
+    while(ar[l]<=pivot)
+    {
+        l++;
+    }
+    while(ar[r]>pivot)
+    {
+        r--;
+    }
+    
+    if(l<r)
+    {
+        temp=ar[l];
+        ar[l]=ar[r];
+        ar[r]=temp;
+          
+    }
+    }
+    
+    temp=ar[start];
+    ar[start]=ar[r];
+    ar[r]=temp;
+    
+    return r;
+       
+}
+    
+
+void helper(int inp[],int si, int ei){
+    
+    if(si>=ei)
+    {
+        return;
+    }
+    
+    int pos= partition(inp,si,ei);
+    
+    helper(inp,si,pos-1);
+    
+    helper(inp,pos+1,ei);
+    
+    
+    
+}
+    
+
+void quickSort(int input[], int size) {
+ 
+    
+    helper(input,0,size-1);
+    
+    
+    
+    
+}

@@ -1,0 +1,132 @@
+// For a given expression in the form of a string, find the minimum number of brackets that can be reversed in order to make the expression balanced. The expression will only contain curly brackets.
+If the expression can't be balanced, return -1.
+
+
+template <typename T>
+class Node {
+	public : 
+		T data;
+		Node<T> *next;
+
+		Node(T data) {
+			this -> data = data;
+			next = NULL;
+		}
+};
+
+template <typename T>
+class Stack {
+	Node<T> *head;
+	int size;		// number of elements prsent in stack
+
+	public :
+
+	Stack() {
+		head = NULL;
+		size = 0;
+	}
+
+	int getSize() {
+		return size;
+	}
+
+	bool isEmpty() {
+		return size == 0;
+	}
+
+	void push(T element) {
+		Node<T> *newNode = new Node<T>(element);
+		newNode -> next = head;
+		head = newNode;
+		size++;
+	}
+
+	T pop() {
+		if(isEmpty()) {
+			return 0;		
+		}
+		T ans = head -> data;
+		Node<T> *temp = head;
+		head = head -> next;
+		delete temp;
+		size--;
+		return ans;
+	}
+
+	T top() {
+		if(isEmpty()) {
+			return 0;		
+		}
+		return head -> data;
+		
+	}
+
+
+};
+
+
+int countBracketReversals(string input) {
+	
+    Stack<char> s; int ans=0; 
+    
+    if(input.size()%2!=0)
+    {
+        return -1;
+    }
+    
+    for(int i=0; input[i]!='\0';i++)
+    {
+        
+        if(input[i]=='{')
+        {
+            s.push(input[i]);
+        }
+        
+        else if(input[i]=='}')
+        {
+            if(s.isEmpty())
+            {
+                s.push(input[i]);
+            }
+            
+            else if(s.top()=='{')
+            {
+                s.pop();
+            }
+            
+            else if(s.top()=='}')
+            {
+                s.push(input[i]);
+            }
+                
+            
+        }
+    
+}
+    
+    while(!s.isEmpty())
+    {
+        char c1=s.top();
+        s.pop();
+        char c2=s.top();
+        s.pop();
+        
+        if(c1=='}'&&c2=='}')
+        {
+          ans+=1;  
+        }
+        
+        if(c1=='{' && c2=='}')
+        {
+            ans+=2;
+        }
+        
+        if(c1=='{' && c2=='{')
+        {
+            ans+=1;
+        }
+    }
+    
+    return ans;
+    
+}

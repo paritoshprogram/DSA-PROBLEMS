@@ -1,0 +1,40 @@
+// Given a generic tree, find and return the node with maximum data. You need to return the node which is having maximum data.
+Return null if tree is empty.
+
+
+TreeNode<int>* maxDataNode(TreeNode<int>* root) {
+ 
+     queue<TreeNode<int>* > q; TreeNode<int>* f; TreeNode<int> *max;
+    
+   // max->data=-1;
+
+        max=root;
+
+    q.push(root);
+    
+    while(!q.empty())
+    {
+        
+        f=q.front();
+        q.pop();
+        
+        if(f->data>max->data)
+        {
+            max=f;
+        }
+        
+        for(int j=0;j<f->children.size();j++)
+        {
+            
+            q.push(f->children[j]);   
+        }
+    
+        
+    }
+    
+    
+    return max;
+    
+    
+    
+}

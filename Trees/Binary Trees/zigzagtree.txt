@@ -1,0 +1,71 @@
+//Given a binary tree, print the zig zag order. In zigzag order, level 1 is printed from left to right, level 2 from right to left and so on. This means odd levels should get printed from left to right and even level right to left.
+
+
+
+2 Stack Approach
+
+#include<stack>
+
+void zigZagOrder(BinaryTreeNode<int> *root) {
+   
+    stack<BinaryTreeNode<int>* > st1; BinaryTreeNode<int>* f; stack<BinaryTreeNode<int>* > st2;
+    
+    
+    st1.push(root);
+   
+    
+    while(!st1.empty() && st2.empty())
+    {
+    int s= st1.size();
+    
+    
+    for(int i=0;i<s;i++)
+    {
+        f=st1.top();
+        cout<<f->data<<" ";
+        
+        st1.pop();
+        
+        if(f->left!=NULL)
+        {
+            st2.push(f->left);
+        }
+        
+        if(f->right!=NULL)
+        {
+            st2.push(f->right);
+        }
+        
+    }
+        
+        cout<<endl;
+    
+    s=st2.size();
+    
+    for(int j=0;j<s;j++)
+    {
+        f=st2.top();
+        cout<<f->data<<" ";
+        
+        st2.pop();
+        
+        if(f->right!=NULL)
+        {
+            st1.push(f->right);
+        }
+        
+        if(f->left!=NULL)
+        {
+            st1.push(f->left);
+        }
+        
+    }
+        
+        cout<<endl;
+    
+    }   
+    
+    
+    
+    
+}

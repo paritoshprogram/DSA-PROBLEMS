@@ -1,0 +1,52 @@
+// You are given with an array of integers and an integer K. You have to find and print the count of all such pairs which have difference K.
+Note: Take absolute difference between the elements of the array.
+
+#include<unordered_map>
+
+int getPairsWithDifferenceK(int *arr, int n, int k) {
+	
+    unordered_map<int,int> m; int count =0;
+    
+    for(int i=0;i<n;i++)
+    {
+        
+        
+        m[arr[i]]++;  
+}
+    
+    for(int j=0;j<n;j++)
+    {
+        if(arr[j]-k==arr[j])
+        {
+            count=count+((m[arr[j]]-1)*2);
+            
+            break;
+        }
+        
+        else{
+        
+        if(m[arr[j]-k]>0 || m[k+arr[j]]>0 )
+        {
+            if(m[arr[j]-k]>0)
+            {
+            count=count+(m[arr[j]]*m[arr[j]-k]);
+        }
+            
+            if(m[k+arr[j]]>0 )
+            {
+                count=count+(m[k+arr[j]]*m[arr[j]]);
+            }
+            
+        }   
+            
+            m.erase(arr[j]);
+            
+        }    
+        
+        
+    }
+    
+    
+    return count;
+}   
+    

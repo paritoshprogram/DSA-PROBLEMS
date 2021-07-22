@@ -1,0 +1,112 @@
+// For a given Binary Tree of type integer and a number K, print out all root-to-leaf paths where the sum of all the node data along the path is equal to K.
+
+Naive SOL 
+
+/* vector<int>* getPath(BinaryTreeNode<int>* root, int data) {
+	if (root == NULL) {
+		return NULL;
+	}
+	
+	if (root->data == data && root->left==NULL && root->right==NULL) {
+		vector<int>* output = new vector<int>();
+		output->push_back(root->data);
+		return output;
+	}
+	
+	vector<int>* leftOutput = getPath(root->left, data);
+	if (leftOutput != NULL) {
+		leftOutput->push_back(root->data);
+		return leftOutput;
+	}
+
+	vector<int>* rightOutput = getPath(root->right, data);
+	if (rightOutput != NULL) {
+			rightOutput->push_back(root->data);
+			return rightOutput;
+	} else {
+		return NULL;
+	}
+
+}
+
+
+void helper(BinaryTreeNode<int> *root, int k,BinaryTreeNode<int> *cur)
+{
+    
+    
+    if(cur==NULL)
+    {
+        return;
+    }
+    
+    helper(root,k,cur->left);
+    
+    if(cur->left==NULL && cur->right==NULL)
+    {
+        
+        vector<int>* v = new vector<int>();
+        
+        v=getPath(root,cur->data);
+        
+        int sum=0;
+                                                  //Naive Solution
+        for(int i=0;i<v->size();i++)
+        {
+          sum+=v->at(i);  
+        }
+        
+       if(sum==k)
+        {
+             
+        for(int j=v->size()-1;j>=0;j--)
+        {
+         cout<<v->at(j)<<" "; 
+        }
+            cout<<endl;
+        }
+        
+    }
+    
+  helper(root,k,cur->right);
+    
+    
+}   */
+
+
+
+Efficient SOL
+
+
+#include <vector> 
+void helper(BinaryTreeNode<int> *root, vector<int> &output, int k)
+{
+    if (root == NULL)
+{
+        return; 
+    }
+    k -= root->data;
+    //jitna deep jate rhege  ottna height k ki 
+    
+    output.push_back(root->data);
+    if (root->left == NULL && root->right == NULL)
+    {
+        if (k == 0) 
+        {
+            for (int i = 0; i < output.size(); i++)
+            {
+                cout << output[i] << " ";
+            }
+            cout << endl;
+        }
+        output.pop_back(); 
+        return;
+    }
+    helper(root->left, output, k);
+    helper(root->right, output, k);
+    output.pop_back();
+}
+void rootToLeafPathsSumToK(BinaryTreeNode<int> *root, int k)
+{
+    vector<int> output;
+    helper(root, output, k); 
+}

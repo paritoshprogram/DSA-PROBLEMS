@@ -1,0 +1,15 @@
+double geometricSum(int k) {
+  
+    if(k==0)
+    {
+        return 1;    
+    }
+    
+   double ans = 1/pow(2,k);
+    
+   return ans+geometricSum(k-1);
+    
+    
+}
+
+

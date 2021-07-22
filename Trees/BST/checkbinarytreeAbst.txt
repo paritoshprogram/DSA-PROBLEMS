@@ -1,0 +1,55 @@
+// Given a binary tree with N number of nodes, check if that input tree is BST (Binary Search Tree). If yes, return true, return false otherwise.
+Note: Duplicate elements should be kept in the right subtree.
+
+int maxValue(BinaryTreeNode<int> *root)
+{
+    if(root->right==NULL)
+    {
+        return root->data;
+    }
+    
+    maxValue(root->right);
+    
+    
+}
+
+
+int minValue(BinaryTreeNode<int> *root)
+{
+    
+    if(root->left==NULL)
+    {
+        return root->data;
+    }
+    
+    maxValue(root->left);
+    
+    
+}
+
+bool isBST(BinaryTreeNode<int> *root) {
+	
+
+  if (root == NULL)
+    return true;
+     
+
+    
+  if (root->left != NULL && maxValue(root->left) > root->data)
+    return false;
+     
+  
+  if (root->right != NULL && minValue(root->right) < root->data)
+    return false;
+   
+
+  if (!isBST(root->left) || !isBST(root->right))
+    return false;
+     
+
+  return true;
+   
+}
+
+
+

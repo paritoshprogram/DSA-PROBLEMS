@@ -1,0 +1,31 @@
+// You have been given a singly linked list of integers. Write a function that returns the index/position of an integer data denoted by 'N' (if it exists). Return -1 otherwise.
+
+int helper(Node *head,int n,int pos )
+{
+      if(head==NULL)
+    {
+        return -1;
+    }
+    
+  
+  if(head->data==n)
+  {
+      return pos;
+  }
+    
+    
+   int count = helper(head->next,n,pos+1);
+    
+    return count;
+    
+}
+int findNode(Node *head, int n)
+{
+   
+    int pos=0;
+    
+    helper(head,n,pos);
+  
+    
+    
+}

@@ -1,0 +1,128 @@
+// For a given a string expression containing only round brackets or parentheses, check if they are balanced or not. Brackets are said to be balanced if the bracket which opens last, closes first.
+
+
+template <typename T>
+class Node {
+	public : 
+		T data;
+		Node<T> *next;
+
+		Node(T data) {
+			this -> data = data;
+			next = NULL;
+		}
+};
+
+template <typename T>
+class Stack {
+	Node<T> *head;
+	int size;		// number of elements prsent in stack
+
+	public :
+
+	Stack() {
+		head = NULL;
+		size = 0;
+	}
+
+	int getSize() {
+		return size;
+	}
+
+	bool isEmpty() {
+		return size == 0;
+	}
+
+	void push(T element) {
+		Node<T> *newNode = new Node<T>(element);
+		newNode -> next = head;
+		head = newNode;
+		size++;
+	}
+
+	T pop() {
+		if(isEmpty()) {
+			return 0;		    
+		}
+		T ans = head -> data;
+		Node<T> *temp = head;
+		head = head -> next;
+		delete temp;
+		size--;
+		return ans;
+	}
+
+	T top() {
+		if(isEmpty()) {
+			return 0;		
+		}
+		return head -> data;
+		
+	}
+
+
+};
+
+
+
+
+
+
+bool isBalanced(string expression) 
+{
+    Stack<char> s;
+    
+    for(int i=0; expression[i]!='\0';i++)
+    {
+        if(expression[i]=='{' || expression[i]=='['||expression[i]=='(')
+        {
+            s.push(expression[i]);
+        }
+        
+        else if(expression[i]=='}' || expression[i]==']'||expression[i]==')')
+        {
+            if(expression[i]=='}')
+            {
+                if(s.top()=='{')
+                {
+                    s.pop();
+                }
+                
+                else return false;
+            }
+            
+            else if(expression[i]==']')
+            {
+               if(s.top()=='[')
+                {
+                    s.pop();
+                }
+                
+                else return false; 
+            }
+            
+            else if(expression[i]==')')
+            {
+               if(s.top()=='(')
+                {
+                    s.pop();
+                }
+                
+                else return false; 
+            }
+            
+            
+        }
+        
+        if(s.isEmpty()==true)
+        {
+            return true;
+        }
+        
+        
+    }
+    
+    
+    
+    
+}

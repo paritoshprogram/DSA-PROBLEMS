@@ -1,0 +1,56 @@
+// For a given a Binary Tree of type integer, print the complete information of every node, when traversed in a level-order fashion.
+
+
+#include<queue>
+
+void printLevelWise(BinaryTreeNode<int> *root) {
+	
+    queue<BinaryTreeNode<int>* > q; BinaryTreeNode<int>* f; 
+    
+    
+    q.push(root);
+    
+    while(!q.empty())
+    {
+        
+        f=q.front();
+        q.pop();
+       
+        if(f!=NULL)
+        {
+      cout<<f->data<<":";
+            
+        }   
+          
+        if(f->left!=NULL)
+        {
+          cout<<"L:"<<f->left->data<<",";
+     
+        q.push(f->left);
+        }
+        
+        if(f->left==NULL)
+        {
+            cout<<"L:"<<-1<<",";
+        }
+        
+        if(f->right!=NULL)
+        {
+          cout<<"R:"<<f->right->data;
+        q.push(f->right);
+         
+        }
+        
+        if(f->right==NULL)
+        {
+            cout<<"R:"<<-1;
+        }
+        
+        cout<<endl;
+        
+    }
+    
+    
+ 
+    
+}

@@ -1,0 +1,50 @@
+//Given a string S, compute recursively a new string where identical chars that are adjacent in the original string are separated from each other by a "*".
+
+
+void help(char inp[], int beg , int size)
+{
+  
+      if(beg==size)
+    {
+       
+        return;
+    }
+    
+    if(inp[beg]==inp[beg+1])
+    {
+        
+        size++;
+        for(int j=size;j>beg+1;j--)
+        {
+           inp[j]=inp[j-1]; 
+        }
+        
+        inp[beg+1]='*';
+        
+        help(inp,beg+2,size);
+    }
+    
+    else
+    {
+        help(inp,beg+1,size);
+    }
+       
+}
+
+
+void pairStar(char input[]) {
+   
+    
+    int len=0 ;   int start=0;
+    
+    for(int i=0;input[i]!='\0';i++)
+    {
+        len++;
+    }
+    
+    help(input,start,len);
+    
+    
+    
+}
+

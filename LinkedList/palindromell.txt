@@ -1,0 +1,73 @@
+//You have been given a head to a singly linked list of integers. Write a function check to whether the list given is a 'Palindrome' or not.
+
+
+Node *rever(Node *head)
+{
+     Node *cur=head;
+    Node *prev=NULL;
+    Node *aft=NULL;
+    
+    while(cur!=NULL)
+    {
+    aft=cur->next;
+    cur->next=prev;
+    prev=cur;
+    cur=aft;
+    
+}
+  head = prev;
+    
+    return head;
+    
+}
+
+
+bool isPalindrome(Node *head)
+{
+   Node *temp=head; int count=0;
+    
+    while(temp!=NULL)
+    {
+        temp=temp->next;
+        
+        count++;
+    }
+    
+    if(count==0 || count==1)
+    {
+        return true;
+    }
+    
+    int n=1;  Node *temp1=head;
+    
+   
+    
+    int mid = (count%2 == 0)? (count/2) : ((count+1)/2);  
+    
+    while(n<mid)
+    {
+        temp1=temp1->next;                      
+        n++;
+    }
+    
+    Node* temp2=temp1->next;
+    
+   // temp1=NULL;
+    
+    
+   Node *temp3 = rever(temp2);                //reversing second half of lis
+    
+    
+    while(head!=NULL &&temp3!=NULL)
+    {
+        if(head->data!=temp3->data)
+        {
+            return false;
+        }
+        head=head->next;
+        temp3=temp3->next;
+    }
+    
+    return true;
+    
+}

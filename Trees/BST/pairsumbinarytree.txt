@@ -1,0 +1,85 @@
+// Given a binary tree and an integer S, print all the pair of nodes whose sum equals S.
+
+
+Brute Force Approach
+
+#include<climits>
+
+bool finder(int num,BinaryTreeNode<int> *root)
+{
+    
+    if(root==NULL){
+        return false;
+    }
+    
+    if(root->data==num )
+    {
+        root->data=INT_MIN;
+        return true;
+    }
+    
+    else{
+    
+   
+       if(finder(num,root->left)){return true;}
+ 
+       if(finder(num,root->right)){return true;}
+        
+        return false;
+ 
+        
+    }
+    
+ 
+    
+}
+
+void helper(BinaryTreeNode<int> *cur,int sum, BinaryTreeNode<int> *root)
+{
+    
+    if(cur==NULL){return ;}
+    
+   
+    
+   bool pair = finder(sum-cur->data,root);
+    
+    if(pair==true &&cur->data!=INT_MIN)
+    {
+        if(cur->data<sum-cur->data)
+        {
+            cout<<cur->data<<" "<<sum-cur->data<<endl;
+        }
+        
+        else
+        {
+             cout<<sum-cur->data<<" "<<cur->data<<endl;
+       }
+    }
+    
+    if(cur->left!=NULL)
+    {
+    helper(cur->left,sum,root);
+    }
+   
+     if(cur->right!=NULL)
+    {
+    helper(cur->right,sum,root);
+    }
+   
+    
+    
+    
+}
+
+
+void pairSum(BinaryTreeNode<int> *root, int sum) {
+   
+   BinaryTreeNode<int> *cur;
+    
+    cur=root;
+
+helper(cur,sum,root);    
+    
+    
+    
+}

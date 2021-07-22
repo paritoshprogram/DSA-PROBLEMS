@@ -1,0 +1,113 @@
+// Given a Binary tree, find the largest BST subtree. That is, you need to find the BST with maximum height in the given binary tree. You have to return the height of largest BST.
+
+
+int maxValue(BinaryTreeNode<int> *root)
+{
+    if(root->right==NULL)
+    {
+        return root->data;
+    }
+    
+    maxValue(root->right);
+    
+    
+}
+
+
+int minValue(BinaryTreeNode<int> *root)
+{
+    
+    if(root->left==NULL)
+    {
+        return root->data;
+    }
+    
+    maxValue(root->left);
+    
+    
+}
+
+bool isBST(BinaryTreeNode<int> *root) {
+	
+   
+
+  if (root == NULL)
+    return true;
+     
+
+    
+  if (root->left != NULL && maxValue(root->left) > root->data)
+    return false;
+     
+  
+  if (root->right != NULL && minValue(root->right) < root->data)
+    return false;
+   
+
+  if (!isBST(root->left) || !isBST(root->right))
+    return false;
+     
+
+  return true;
+   
+}
+
+int height(BinaryTreeNode<int>* root) {
+   
+    if(root==NULL)
+    {
+        return 0;
+    }
+    
+    int lh=height(root->left);
+    int rh=height(root->right);
+    
+    if(lh>rh)
+    {
+        return lh+1;
+    }
+    
+    else
+    {
+        return rh+1;
+    }
+    
+    
+    
+    
+}
+
+int helper(BinaryTreeNode<int> *root)
+{
+        
+    int h;
+    if(root==NULL)
+    {
+        return 0;
+    }
+    
+    
+    if(isBST(root)==true)
+    {
+        h=height(root);
+        
+        return h;
+    }
+    
+ else { return max(helper(root->left), helper(root->right));}
+    
+    
+    
+}
+
+
+int largestBSTSubtree(BinaryTreeNode<int> *root) {
+ 
+
+    int ans= helper(root);
+    
+    
+    
+    return ans;
+    
+}

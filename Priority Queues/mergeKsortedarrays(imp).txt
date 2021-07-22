@@ -1,0 +1,51 @@
+// Given k different arrays, which are sorted individually (in ascending order). You need to merge all the given arrays such that output array should be sorted (in ascending order).
+
+
+#include<queue>
+#define ppi pair<int,pair<int,int>>
+
+vector<int> mergeKSortedArrays(vector<vector<int>*> input) {
+  
+    ppi val;  vector<int> output;
+    
+    priority_queue<ppi, vector<ppi>, greater<ppi> > pq; int k; k=input.size();
+    
+    for (int i = 0; i < k; i++)
+    {    
+   pq.push({ input[i]->at(0), { i, 0 } });
+        
+    }  
+    
+    while(!pq.empty()  )
+    {
+        val=pq.top();
+        
+        output.push_back(val.first);
+        
+    
+        
+        pq.pop();
+        
+        int s= val.second.first;
+        
+        int r= val.second.second;
+        
+        if(r+1<input[s]->size())
+            
+        {
+        pq.push({input[s]->at(r+1),{s,r+1}});
+        } 
+        
+       // else
+       // {
+         //   break;
+       // }
+            
+    }
+    
+  
+    
+   return output; 
+    
+    
+}

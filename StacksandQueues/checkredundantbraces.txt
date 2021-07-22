@@ -1,0 +1,106 @@
+//For a given expression in the form of a string, find if there exist any redundant brackets or not. It is given that the expression contains only rounded brackets or parenthesis and the input expression will always be balanced.
+A pair of the bracket is said to be redundant when a sub-expression is surrounded by unnecessary or needless brackets.
+
+
+
+
+
+template <typename T>
+class Node {
+	public : 
+		T data;
+		Node<T> *next;
+
+		Node(T data) {
+			this -> data = data;
+			next = NULL;
+		}
+};
+
+template <typename T>
+class Stack {
+	Node<T> *head;
+	int size;		// number of elements prsent in stack
+
+	public :
+
+	Stack() {
+		head = NULL;
+		size = 0;
+	}
+
+	int getSize() {
+		return size;
+	}
+
+	bool isEmpty() {
+		return size == 0;
+	}
+
+	void push(T element) {
+		Node<T> *newNode = new Node<T>(element);
+		newNode -> next = head;
+		head = newNode;
+		size++;
+	}
+
+	T pop() {
+		if(isEmpty()) {
+			return 0;		
+		}
+		T ans = head -> data;
+		Node<T> *temp = head;
+		head = head -> next;
+		delete temp;
+		size--;
+		return ans;
+	}
+
+	T top() {
+		if(isEmpty()) {
+			return 0;		
+		}
+		return head -> data;
+		
+	}
+
+
+};
+
+
+
+
+
+bool checkRedundantBrackets(string expression) {
+	
+    Stack<char> s;
+    
+    for(int i=0; expression[i]!='\0'; i++)
+    {
+        if((expression[i]>=33 && expression[i]<=40 )||(expression[i]>=42 && expression[i]<=47 ))
+        {
+            s.push(expression[i]);
+        }
+        
+        else if(expression[i]==')')
+        {
+            if(s.top()=='(')
+            {
+                return true;
+            }
+            while(s.top()!='(')
+            {
+                s.pop();
+            }
+            s.pop();
+            
+            
+        }
+        
+            
+    }
+    
+    return false;
+    
+    
+}

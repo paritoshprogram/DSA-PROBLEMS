@@ -1,0 +1,62 @@
+//Given a binary search tree and an integer S, find pair of nodes in the BST which sum to S. You can use extra space of the order of O(log n).
+
+void pairsum(BinaryTreeNode<int> *root,vector<int>& v)
+{
+     
+    
+    if(root==NULL)
+    {
+        return;
+    }
+    
+    
+   
+    
+   pairsum(root->left,v); 
+    
+   v.push_back(root->data);
+    
+   
+    
+ pairsum(root->right,v); 
+    
+  
+    
+    
+}
+
+
+
+
+void printNodesSumToS(BinaryTreeNode<int> *root, int s) {
+    
+    if(root==NULL){return ;}
+   
+    vector<int> va;
+    
+    pairsum(root,va);
+    
+    int i=0; int j=va.size()-1;
+    
+    while(i<j)
+    {
+        if(va[i]+va[j]==s)
+        {
+            cout<<va[i]<<" "<<va[j]<<endl;
+            
+            i++; j--;
+        }
+        
+        else if(va[i]+va[j]<s)
+        {
+            i++;
+        }
+        
+        else if(va[i]+va[j]>s)
+        {
+            j--;
+        }
+    }
+    
+    
+}

@@ -1,0 +1,50 @@
+//Given a string, compute recursively a new string where all 'x' chars have been removed.
+
+
+
+void help(char inp[],int beg,int size)
+{
+ 
+    if(beg==size)
+    {
+       // cout<<inp;
+        return;
+    }
+    
+    if(inp[beg]=='x')
+    {
+       // size--;
+        for(int j=beg+1;j<size;j++)
+        {
+           inp[j-1]=inp[j]; 
+        }
+        
+        inp[size-1]='\0';
+        
+        help(inp,beg,size-1);
+    }
+    
+    else
+    {
+        help(inp,beg+1,size);
+    }
+    
+      
+    
+}
+
+void removeX(char input[]) {
+   
+    int len=0 ;   int start=0;
+    
+    for(int i=0;input[i]!='\0';i++)
+    {
+        len++;
+    }
+    
+    help(input,start,len);
+    
+    
+
+}
+

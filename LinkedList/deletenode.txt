@@ -1,0 +1,52 @@
+// You have been given a linked list of integers. Your task is to write a function that deletes a node from a given position, 'pos'.
+
+
+Node *deleteNode(Node *head, int pos)
+{
+    
+    if(head==NULL)
+    {
+        return head;
+    }
+    
+   Node *temp=head; int count=0;  Node *save;
+
+    
+    if(pos==0)
+    {
+        Node *n=head;
+        head=head->next;
+        delete n;
+        
+        return head;
+    }
+    
+
+    while(count < pos-1 && temp!=NULL)
+    {
+        temp=temp->next;
+        
+       
+        
+        count++;
+    }
+    
+    if(temp==NULL )
+    {
+        return head;
+    }
+    if(temp->next==NULL )
+    {
+       return head;
+    } 
+        
+   
+    save=temp->next;
+    temp->next=temp->next->next;
+    
+    delete save;
+    
+    return head;
+        
+       
+}

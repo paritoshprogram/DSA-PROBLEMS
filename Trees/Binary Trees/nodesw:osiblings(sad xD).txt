@@ -1,0 +1,47 @@
+// For a given Binary Tree of type integer, print all the nodes without any siblings.
+
+
+
+void printNodesWithoutSibling(BinaryTreeNode<int> *root) {
+    
+        queue<BinaryTreeNode<int>* > q; BinaryTreeNode<int>* f; 
+    
+    
+    q.push(root);
+    
+    while(!q.empty())
+    {
+       f=q.front();
+        
+        q.pop();
+        
+        if(f->left!=NULL && f->right==NULL)
+        {
+            cout<<f->left->data<<" ";
+        }
+        if(f->left==NULL && f->right!=NULL)
+        {
+            cout<<f->right->data<<" ";
+        }
+        
+        
+        
+        
+        if(f->left!=NULL)
+        {
+            q.push(f->left);
+        }
+          
+        if(f->right!=NULL)
+        {
+            q.push(f->right);
+        }
+            
+            
+        }
+    
+         
+  
+    
+ 
+}

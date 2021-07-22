@@ -1,0 +1,21 @@
+void printPostOrder(TreeNode<int>* root) {
+    
+    
+if(root==NULL)
+{
+    return;
+}
+    
+    for(int j=0;j<root->children.size();j++)
+    {
+        printPostOrder(root->children[j]);
+    
+        //cout<<root->data<<" ";
+    }
+    
+   cout<<root->data<<" ";
+    
+    
+    
+    
+}

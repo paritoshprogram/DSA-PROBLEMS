@@ -1,0 +1,40 @@
+//Given an integer n, using phone keypad find out and print all the possible strings that can be made using digits of input n.
+
+
+
+
+
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+void helper(int num, string output)
+{
+    
+    int inputsize; int n;  char ch;
+    
+    string keys[10]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    
+    if(num==0)
+    {
+       cout<<output<<endl;
+        return ;
+    }
+   
+  n=num%10;
+    
+    inputsize= keys[n].size();
+    
+    for(int i=0;i<inputsize;i++)
+    {
+        ch=keys[n][i];
+        
+        helper(num/10,ch+output);
+        
+    }
+    
+    
+    
+}

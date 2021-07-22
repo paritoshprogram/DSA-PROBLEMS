@@ -1,0 +1,74 @@
+//Given a generic tree, find and return the node for which sum of its data and data of all its child nodes is maximum. In the sum, data of the node and data of its immediate child nodes has to be taken.
+
+
+TreeNode<int>* maxSumNode(TreeNode<int>* root) {
+   
+    
+   /* queue<TreeNode<int>* > q; TreeNode<int>* f;  TreeNode<int>* max;  int sum;
+    
+    
+    q.push(root);
+    
+    while(!q.empty())
+    {
+    
+        
+        f=q.front();
+    
+        q.pop();
+        
+        if(f->children.size()!=0)
+        {
+    
+        sum=0;
+                                                       //Iterative
+       sum+=f->data;
+        for(int j=0;j<f->children.size();j++)
+        {
+            sum+=f->children[j]->data;
+            q.push(f->children[j]);   
+        }
+    
+        if(sum>max->data)
+        {
+            max=f;
+        }
+       
+        }
+        
+    }
+    
+    
+return max;
+*/
+    
+    
+    int sum = root->data;  TreeNode<int>* max;  TreeNode<int>* ans;
+    
+    for(int i=0;i<root->children.size();i++)
+    {
+        sum+=root->children[i]->data;
+        if(sum>max->data)
+        {
+            max=root;
+        
+        }
+        
+       ans=max;
+        
+       // return ans;                                                 //Recursive
+        
+        
+    }
+    
+    
+for(int j=0;j<root->children.size();j++)
+{
+   maxSumNode(root->children[j]);
+}
+  
+    return ans;
+    
+     
+    
+}

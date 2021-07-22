@@ -1,0 +1,63 @@
+struct Node* sortedMerge(struct Node* a, struct Node* b)
+{
+   
+    if (a == NULL) {
+        return b;
+    }
+ 
+    else if (b == NULL) {
+        return a;
+    }
+ 
+    struct Node* result = NULL;
+ 
+
+    if (a->data <= b->data)
+    {
+        result = a;
+        result->next = sortedMerge(a->next, b);
+    }
+    else {
+        result = b;
+        result->next = sortedMerge(a, b->next);
+    }
+ 
+    return result;
+}
+
+
+Node *mergeSort(Node *head)
+{
+	 Node *first=head; Node *temp=head;  Node *newhead; Node *second;
+    
+    if(first==NULL||first->next==NULL)
+    {
+        return first;
+    }
+    
+    else
+    {
+        
+        while(first->next != NULL &&first!=NULL )
+		{
+			first = first->next;
+			if(first->next != NULL &&first!=NULL)
+			{
+				temp = temp->next;
+				first = first->next;
+			}
+		}
+		second = temp->next;
+		temp->next = NULL;
+		first = head;
+	}
+    
+     Node*a = mergeSort(first);
+     Node *b = mergeSort(second);
+     newhead= sortedMerge(a,b);
+    
+    
+    return newhead;
+           
+   
+}

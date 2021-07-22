@@ -1,0 +1,34 @@
+Node *bubbleSort(Node *head)
+{
+	if(head==NULL)
+    {
+        return head;
+    }
+    
+    int swap;  Node *temp=head; Node *prev=NULL;
+    
+    while(temp->next!=NULL)
+    {
+        Node *temp1=head;
+        while(temp1->next!=prev)
+        {
+            if(temp1->data>temp1->next->data)
+            {
+                swap=temp1->data;
+                temp1->data=temp1->next->data;
+                temp1->next->data=swap;
+                
+            }
+            
+            temp1=temp1->next;
+        }
+        
+        prev=temp1;
+        
+        temp=temp->next;
+    }
+    
+    return head;
+      
+    
+}

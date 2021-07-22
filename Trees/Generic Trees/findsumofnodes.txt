@@ -1,0 +1,31 @@
+int sumOfNodes(TreeNode<int>* root) {
+   
+    queue<TreeNode<int>* > q; TreeNode<int>* f; int sum=0;
+    
+    
+    q.push(root);
+    
+    while(!q.empty())
+    {
+        
+        f=q.front();
+        q.pop();
+        
+        sum=sum+f->data;
+        
+        for(int j=0;j<f->children.size();j++)
+        {
+            
+            q.push(f->children[j]);   
+        }
+    
+        
+    }
+    
+    
+    return sum;
+    
+  
+    
+    
+}

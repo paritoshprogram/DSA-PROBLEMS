@@ -1,0 +1,34 @@
+// Given a string S, you need to remove all the duplicates. That means, the output string should contain each character only once. The respective order of characters should remain same, as in the input string.
+
+
+#include<unordered_map>
+
+
+string uniqueChar(string str) {
+	
+    unordered_map<char,int> m;   string output;
+    
+    for(int i=0; str[i]!='\0';i++)
+    {
+        m[str[i]]++;
+        
+        if(m[str[i]]==1)
+        {
+            
+            
+            output=output+str[i];
+        
+        }
+        
+        
+        
+    }
+    
+   
+    
+    
+    
+    return output;
+    
+    
+}

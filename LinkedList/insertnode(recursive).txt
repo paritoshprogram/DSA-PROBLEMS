@@ -1,0 +1,33 @@
+Node* insertNode(Node *head, int i, int data) {
+	
+    
+    if(head==NULL)
+    
+    {
+        if(i==0){                                       //for i>=length of linked list
+            
+          Node* newnode = new Node(data);
+        return newnode;                            // for i==length of list so creating a new node and appending to end of list
+    }
+    
+    return head;}    //i>length of list . returning head directly
+    
+  if(i==0)
+  {
+      Node* newnode = new Node(data);   //parametrized constructor
+      
+      newnode->data=data;
+      newnode->next = NULL;                            // general case of appending in middle which is beg of recursive list
+      
+      newnode->next=head;
+      head = newnode;
+      
+      return head;
+  }
+    
+   head->next = insertNode(head->next,i-1,data);
+    
+    return head;
+   
+    
+}
