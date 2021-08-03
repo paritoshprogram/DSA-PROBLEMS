@@ -1,0 +1,37 @@
+#include<climits>
+
+int countStepsToOne(int n)
+{
+    int *ar = new int[n+1];   int ans; int x; int y=INT_MAX; int z=INT_MAX;
+    
+    ar[1]=0;  ar[0]=0;
+	
+    for(int i=2;i<=n;i++)
+    {
+        ans=ar[i-1];
+        
+        if(i%3==0)
+        {
+            if(ar[i/3]<ans)
+            ans=ar[i/3];
+        }
+        
+        if(i%2==0)
+        {
+            if(ar[i/2]<ans)
+            ans=ar[i/2];
+        }
+        
+      
+        
+        ar[i]=ans+1;
+        
+    }
+    
+    
+    return ar[n];
+    
+    
+    
+    
+}

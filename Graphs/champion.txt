@@ -1,0 +1,88 @@
+// Given a NxM matrix containing Uppercase English Alphabets only. Your task is to tell if there is a path in the given matrix which makes the sentence “CHAMPION” .
+There is a path from any cell to all its neighbouring cells. For a particular cell, neighbouring cells are those cells that share an edge or a corner with the cell.
+Input Format :
+The first line of input contains two space separated integers N and M, where N is number of rows and M is the number of columns in the matrix. 
+Each of the following N lines contain M characters. Please note that characters are not space separated.
+Output Format :
+Print 1 if there is a path which makes the sentence “CHAMPION” else print 0.
+
+
+
+bool dfs(vector<vector<char>> &board,int **vis, string s, int i, int j,int n,int m)
+{
+    
+    if(s.length() == 0) {
+			vis[i][j] = 1;
+			return true;
+		}
+
+		vis[i][j] = 1;
+		
+		int X_Dir[8] = {-1,1,0,0,1,-1,1,-1 };
+		int Y_Dir[8] = {0,0,-1,1,1,-1,-1,1 };
+
+		for(int k=0;k<8;k++) {
+
+			int x = i+ X_Dir[k];
+			int y = j+ Y_Dir[k];
+
+			if( x>=0 && y>=0 && x< n &&
+					y < m && 
+					board[x][y] == s[0] && vis[x][y]==0  ) {
+
+				bool smallAns = dfs(board, vis, s.substr(1), x, y,n,m);
+				if(smallAns) {
+					return smallAns;
+				}
+				
+			}
+
+
+		}
+		
+		vis[i][j] = 0;      //backtrack
+		return false;
+
+
+    
+}
+
+bool hasPath(vector<vector<char>> &board, int n, int m) {
+    
+    string s = "CHAMPION";
+    
+    
+    int **vis = new int*[n];
+for(int i = 0; i < n; ++i) {
+    vis[i] = new int[m];
+}
+    
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            vis[i][j]=0;
+        }
+    }
+
+    
+    
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            if(board[i][j]=='C' )
+            {
+                if(dfs(board,vis,s.substr(1),i,j,n,m)==true)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+    
+    
+    return false;
+    
+    
+}

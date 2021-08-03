@@ -1,0 +1,104 @@
+#include<stack>
+#include<queue>
+#include <iostream>
+#include <utility>
+using namespace std;
+
+int main() {
+    int n,m;  int s,e;  int t; int v1,v2; stack<pair<int,int>> st;
+    
+    cin>>n>>m;  
+    
+  
+    
+    int ar[n][n];  int visited[n];
+    
+    for(int k=0;k<n;k++){visited[k]=0;}
+    
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+           ar[i][j]=0;
+        }
+      
+    }
+    
+    
+    for(int x=0;x<m;x++)
+    {
+   
+            cin>>s>>e;
+            ar[s][e]=1;
+            ar[e][s]=1;
+      
+    }
+     
+    
+      cin>>v1>>v2;
+    
+    
+    queue<int> q;
+    
+    visited[v1]=1;
+
+   q.push(v1);
+    
+    st.push({v1,-1});
+        
+    
+    while(!q.empty())
+    {
+        t=q.front();
+        
+        
+        if(t==v2)
+        {
+           break;
+        }
+        
+        
+        q.pop();
+        
+        for(int i=0;i<n;i++)
+        {
+            
+            if(visited[i]==0 && ar[t][i]==1)
+            {
+                visited[i]=1;
+                
+                st.push({i,t});
+                
+                q.push(i);
+                
+                if(i==v2)
+                {
+                    break;
+                }
+                
+            }
+        }  
+       
+    }
+    
+    pair<int,int> l;
+    
+ int parent =v2;
+        
+  while(parent!=-1 && !st.empty())
+  {
+      l=st.top();
+      
+      if(l.first==parent)
+      {
+      cout<<l.first<<" ";
+          
+          parent=l.second;
+      }
+      
+      
+      st.pop();
+    
+}
+    
+    

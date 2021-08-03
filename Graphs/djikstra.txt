@@ -1,0 +1,117 @@
+// Given an undirected, connected and weighted graph G(V, E) with V number of vertices (which are numbered from 0 to V-1) and E number of edges.
+Find and print the shortest distance from the source vertex (i.e. Vertex 0) to all other vertices (including source vertex also) using Dijkstra's Algorithm.
+Input Format :
+Line 1: Two Integers V and E (separated by space)
+Next E lines : Three integers ei, ej and wi, denoting that there exists an edge between vertex ei and vertex ej with weight wi (separated by space)
+Output Format :
+For each vertex, print its vertex number and its distance from source, in a separate line. The vertex number and its distance needs to be separated by a single space.
+Note : Order of vertices in output doesn't matter.
+Constraints :
+2 <= V, E <= 10^5
+Time Limit: 1 sec
+Sample Input 1 :
+4 4
+0 1 3
+0 3 5
+1 2 1
+2 3 8
+Sample Output 1 :
+0 0
+1 3
+2 4
+3 5
+
+
+
+
+#include<climits>
+#include<queue>
+#include <iostream>
+using namespace std;
+
+void djikstra(int **mat,int n)
+{
+    
+    int *visited = new int[n];
+    
+    int *distance = new int[n];
+    
+    for(int i=0;i<n;i++)
+    {
+        distance[i]=INT_MAX;
+        visited[i]=0;
+    }
+    
+    priority_queue<pair<int,int>> pq;  pair<int,int> t;
+    
+    distance[0]=0;
+    
+    pq.push({0,0});
+    
+    while(!pq.empty())
+    {
+        t= pq.top();
+        
+        visited[t.first]=1;
+        
+        pq.pop();
+        
+        for(int i=0;i<n;i++)
+        {
+            if(mat[t.first][i]!=0 )
+            {
+            if(distance[i] > distance[t.first]+mat[t.first][i])
+            {
+                distance[i]=distance[t.first]+mat[t.first][i];
+                
+                pq.push({i,distance[i]});
+            }
+            
+            }
+            
+        }
+        
+       
+    }
+    
+    for(int j=0;j<n;j++)
+    {
+        cout<<j<<" "<<distance[j]<<endl;
+    }
+    
+ 
+    
+    
+}
+
+int main() {
+   
+     int n,E;
+    
+    cin>>n>>E;
+    
+    
+    int** mat = new int*[n];
+  for(int i=0; i<n; i++){
+    mat[i]=new int[n];
+    for(int j=0; j<n; j++){
+      mat[i][j]=0;
+    }
+  }
+  
+   
+    
+    for(int i=0;i<E;i++)
+    {
+        int s,d,w;
+        
+        cin>>s>>d>>w;
+        
+        mat[s][d]=w;
+        mat[d][s]=w;
+        
+    }
+    
+    djikstra(mat,n);
+    
+}

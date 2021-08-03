@@ -1,0 +1,90 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+bool unassignedLoc(int board[9][9], int &row, int &col){
+    for(int i=0; i<9; i++){
+        for(int j=0; j<9; j++){
+            if(board[i][j] == 0){
+                row = i;
+                col = j;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool isHorizontal(int board[9][9], int row, int num){
+    for(int i=0; i<9; i++){
+        if(board[row][i] == num){
+            return false;
+        }
+    }
+    return true;
+}
+
+bool isVertical(int board[9][9], int col, int num){
+    for(int i=0; i<9; i++){
+        if(board[i][col] == num){
+            return false;
+        }
+    }
+    return true;
+}
+
+bool isGrid(int board[9][9], int row, int col, int num){
+    int rowFactor = row - (row%3);
+    int colFactor = col - (col%3);
+    for(int i=0; i<3; i++){
+        for(int j=0; j<3; j++){
+            if(board[i + rowFactor][j + colFactor] == num){
+            	return false;
+        	}
+        }
+    }
+    return true;
+}
+
+bool isPossible(int board[9][9], int row, int col, int num){
+    if(isHorizontal(board, row, num) && isVertical(board, col, num) && isGrid(board, row, col, num)){
+        return true;
+    }
+    return false;
+}
+
+bool sudoku(int board[9][9]){
+    int row,col;
+    if(!unassignedLoc(board, row, col)){
+        return true;
+    }
+    
+    for(int i=1; i<=9; i++){
+        if(isPossible(board, row, col, i)){
+            board[row][col] = i;
+            if(sudoku(board)){
+                return true;
+            }
+            board[row][col] = 0;
+        }
+    }
+    
+    return false;
+}
+
+int main(){
+    // write your code here
+    int board[9][9];
+    for(int i=0; i<9; i++){
+        for(int j=0; j<9; j++){
+            cin>>board[i][j];
+        }
+    }
+    if(sudoku(board)){
+        cout<<"true"<<endl;
+    }else{
+        cout<<"false"<<endl;
+    }
+    return 0;
+}
+
+

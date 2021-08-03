@@ -1,0 +1,29 @@
+#include<climits>
+#include<math.h>
+
+int balancedBTs(int n) {
+    
+    int *ar=new int[n+1];
+    
+    ar[0]=1; ar[1]=1;  int x,y,a,b;
+    
+        int mod = pow(10,9)+7;
+    
+    if(n>1)
+    {
+       for(int i=2;i<=n;i++)
+       {
+           x=ar[i-1];
+           y=ar[i-2];
+           
+           a = (int)((long(x)*x)%mod);
+           b = (int)(2*(long(x)*y)%mod);
+    
+          ar[i]= (a+b)%mod;
+           
+       }
+    }
+    
+    return ar[n];
+    
+}
