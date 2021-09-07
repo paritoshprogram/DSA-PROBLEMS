@@ -1,0 +1,36 @@
+// You are given a number of queries where each query contains a single integer ‘N’, your task is to find the prime factorization of each integer using a sieve.
+For Example:
+For ‘N’ = 12, the output will be 2, 2, 3.
+
+
+vector<vector<int>> primeFactorization(vector<int> &ar,int q){
+   
+    
+    vector<vector<int>> v;
+    
+    for(int j=0;j<q;j++)
+    {
+        vector<int> v1;
+        
+        int n = ar[j];
+    
+    for(int i=2;i*i<=n;i++)
+    {
+       while(n%i==0)
+       {
+           v1.push_back(i);
+           n = n/i;
+       }
+    }
+        
+        if(n!=1)
+        {
+            v1.push_back(n);
+        }
+        v.push_back(v1);
+
+    } 
+    
+  return v;  
+    
+}

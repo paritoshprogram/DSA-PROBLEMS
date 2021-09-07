@@ -1,0 +1,40 @@
+//Ninja is learning GCD and he is playing with few numbers. Now he is being provided few numbers in an array. Now he is being asked to split the array such that in all the subarrays the GCD of the starting and the ending element is greater than 1. As this procedure is expensive so Ninja needs to create the minimum number of subarrays that satisfy the above property. If it is not possible to create such subarrays then return -1.
+For eg:
+Let arr[] = [2, 2, 4, 3, 6]. So minimum number of subarrays required is 2 which is [2, 2, 4] and [3, 6].
+
+
+
+#include<bits/stdc++.h>
+
+int gcd(int a, int b)
+{
+     if (b == 0)
+        return a;
+    return gcd(b, a % b);   
+}
+
+int minSubarrays(vector<int>arr) {
+
+    int n = arr.size();
+    int dp[n+1];   dp[-1]=0; dp[0]=0; int flag =0;
+    
+    for(int i=0;i<=n;i++)
+    {
+        dp[i]=dp[i-1]+1;
+        for(int j=0;j<=i;j++)
+        {
+            if(j!=i)
+            {
+            if(gcd(arr[i],arr[j])>1)
+            {
+                flag=-1;
+                dp[i]=min(dp[i],dp[j-1]+1);
+            }
+            } 
+        }
+        
+    }
+    if(flag==0){return -1;}
+    
+    return dp[n-1];
+}
